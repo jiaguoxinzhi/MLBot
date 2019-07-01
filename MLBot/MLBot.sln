@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLBot", "MLBot\MLBot.csproj", "{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B550F90-3190-43D5-98AB-6282B61314A7}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B9DAEE2-D813-48B1-996F-8A574F7A7D36}
+	EndGlobalSection
+EndGlobal
