@@ -10,3 +10,6 @@
 
 # 设计与调试初宗
 用于微信公从号的自动聊天功能、与及自动处理业务的功能。尽可能的通用与广泛性支持。
+
+# 授权
+遵循  [url=https://github.com/jiaguoxinzhi/MLBot/blob/master/LICENSE name="MIT 授权"]
