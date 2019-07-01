@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MLBot_Common\MLBot.Common.csproj" />
+    <ProjectReference Include="..\MLBot\MLBot.csproj" />
   </ItemGroup>
 
 </Project>
