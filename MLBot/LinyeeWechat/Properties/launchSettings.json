@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "LinyeeWechat": {
+    "MLBot.Wechat": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",

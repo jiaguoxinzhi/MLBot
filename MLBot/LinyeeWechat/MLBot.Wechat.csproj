@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MLBot_Core\MLBot.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
-﻿using MLBot.Attributes;
+﻿
 using System;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using MLBot.Extentions;
 
-namespace MLBotClient
+namespace MLBot.Client
 {
     /// <summary>
     /// 客户端

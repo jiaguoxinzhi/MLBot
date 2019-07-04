@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MLBot.Attributes
+namespace MLBot
 {
     /// <summary>
     /// 作者

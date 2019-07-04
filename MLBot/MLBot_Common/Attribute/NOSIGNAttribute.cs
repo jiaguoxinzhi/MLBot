@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MLBot.Attributes
+namespace MLBot
 {
     /// <summary>
     /// 不参与签名

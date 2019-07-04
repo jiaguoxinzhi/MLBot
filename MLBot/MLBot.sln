@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLBot", "MLBot\MLBot.csproj", "{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B550F90-3190-43D5-98AB-6282B61314A7}"
 	ProjectSection(SolutionItems) = preProject
 		..\LICENSE = ..\LICENSE
@@ -18,15 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{8E1D2106-65DF-46B9-9932-D34377454AED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinyeeWechat", "LinyeeWechat\LinyeeWechat.csproj", "{A38AFBB8-A27A-456A-92AB-93EAF40A98EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinyeeWechat", "LinyeeWechat\LinyeeWechat.csproj", "{A38AFBB8-A27A-456A-92AB-93EAF40A98EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLBotServer", "MLBotServer\MLBotServer.csproj", "{1F09213C-6E63-4D54-8792-FBF10930CBD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLBotServer", "MLBotServer\MLBotServer.csproj", "{1F09213C-6E63-4D54-8792-FBF10930CBD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLBot.Common", "MLBot_Common\MLBot.Common.csproj", "{86FB5BE2-2DD6-4B40-A7E0-29BCF04ADF26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLBot.Common", "MLBot_Common\MLBot.Common.csproj", "{86FB5BE2-2DD6-4B40-A7E0-29BCF04ADF26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{F85884FD-782D-4ACE-9BE8-FE0DDF911A7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLBotClient", "MLBotClient\MLBotClient.csproj", "{0D0C58E3-C111-45A8-A9CF-22BE5FAB64E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLBotClient", "MLBotClient\MLBotClient.csproj", "{0D0C58E3-C111-45A8-A9CF-22BE5FAB64E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLBot.Core", "MLBot_Core\MLBot.Core.csproj", "{18A6CDB0-D32D-4FC4-A334-0DD9E7D7E5DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{368BF826-B902-4B57-9FD0-47BC4DD1EC5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A38AFBB8-A27A-456A-92AB-93EAF40A98EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A38AFBB8-A27A-456A-92AB-93EAF40A98EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A38AFBB8-A27A-456A-92AB-93EAF40A98EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,6 +50,10 @@ Global
 		{0D0C58E3-C111-45A8-A9CF-22BE5FAB64E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D0C58E3-C111-45A8-A9CF-22BE5FAB64E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D0C58E3-C111-45A8-A9CF-22BE5FAB64E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18A6CDB0-D32D-4FC4-A334-0DD9E7D7E5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18A6CDB0-D32D-4FC4-A334-0DD9E7D7E5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18A6CDB0-D32D-4FC4-A334-0DD9E7D7E5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18A6CDB0-D32D-4FC4-A334-0DD9E7D7E5DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +63,7 @@ Global
 		{1F09213C-6E63-4D54-8792-FBF10930CBD7} = {8E1D2106-65DF-46B9-9932-D34377454AED}
 		{86FB5BE2-2DD6-4B40-A7E0-29BCF04ADF26} = {F85884FD-782D-4ACE-9BE8-FE0DDF911A7B}
 		{0D0C58E3-C111-45A8-A9CF-22BE5FAB64E2} = {8E1D2106-65DF-46B9-9932-D34377454AED}
+		{18A6CDB0-D32D-4FC4-A334-0DD9E7D7E5DE} = {F85884FD-782D-4ACE-9BE8-FE0DDF911A7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B9DAEE2-D813-48B1-996F-8A574F7A7D36}
