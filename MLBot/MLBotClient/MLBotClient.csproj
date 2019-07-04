@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MLBot_Common\MLBot.Common.csproj" />
+  </ItemGroup>
+
 </Project>

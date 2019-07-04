@@ -12,6 +12,19 @@
 * 用于微信公从号的自动聊天功能、与及自动处理业务的功能。尽可能的通用与广泛性支持。
 * 其它机器人项目：[BotSharp](https://github.com/SciSharp/BotSharp)
 * 图灵机器人：（好像收费，自己找吧）
+* 逐步向高并发（信息爆炸）长时唠（信息锁链）多专业 高IQ高EQ高AQ发展
 
 # 授权
 遵循  [MIT 授权](https://github.com/jiaguoxinzhi/MLBot/blob/master/LICENSE)
+
+# 已知成熟Ai对话机器人
+* 微软小冰
+
+# 词汇解释
+* IQ：Intelligence Quotient，智力商数，简称智商。学习能力、实践能力。
+* EQ：Emotional Quotient，指情绪商数，简称情商。沟通能力、协作能力、情绪控制能力。
+* AQ：Adversity Quotient，逆境商数，简称逆商或挫商。主动进取、成压能力。
+* ?Q：自身控制能力（运动能力、毛孔控制、心跳控制、呼吸控制、图辨、声辨、嗅辨、味辨、触感）。
+
+# 当前开发阶段
+* 构思框架与将要延伸的方向

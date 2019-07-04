@@ -5,12 +5,22 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using MLBot.Extentions;
+using MLBot.Attributes;
 
 namespace MLBotServer
 {
-    class Program
+    /// <summary>
+    /// 服务端
+    /// </summary>
+    [Author("Linyee", "2019-07-01")]
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// 服务端入口
+        /// </summary>
+        /// <param name="args"></param>
+        [Author("Linyee", "2019-07-01")]
+        public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
 
@@ -94,7 +104,8 @@ namespace MLBotServer
         /// 连接完成时
         /// </summary>
         /// <param name="tcpclt"></param>
-        private static void OnClientConnectioned(TcpClient tcpclt)
+        [Author("Linyee", "2019-07-01")]
+        public static void OnClientConnectioned(TcpClient tcpclt)
         {
             var tcpstream= tcpclt.GetStream() ;
             tcpstream.Write(Encoding.UTF8.GetBytes("欢迎光临，小易正在为您服务！"));
