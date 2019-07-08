@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="项目说明.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MLBot_Common\MLBot.Common.csproj" />
   </ItemGroup>
 

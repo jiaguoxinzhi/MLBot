@@ -1,0 +1,3 @@
+::Æô¶¯·þÎñ
+dotnet MLBot.Core.dll
+pause

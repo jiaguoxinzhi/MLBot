@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MLBot.Extentions
+namespace MLBot
 {
     /// <summary>
     /// 控制台 扩展
