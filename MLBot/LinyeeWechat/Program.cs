@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MLBot.Wechat
+namespace MLBot.Mvc
 {
     public class Program
     {

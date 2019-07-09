@@ -13,8 +13,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace MLBot.Wechat
+namespace MLBot.Mvc
 {
     public class Startup
     {
@@ -49,6 +51,34 @@ namespace MLBot.Wechat
                 options.IdleTimeout = TimeSpan.FromMinutes(1);
             });
 
+            //Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                {
+                    In = "header",
+                    Description = "Please insert JWT with Bearer schema. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
+
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
+                  { "Bearer", Enumerable.Empty<string>() },
+                });
+
+                var info = Configuration.GetSection("Swagger").Get<Info>();
+                c.SwaggerDoc(info.Version, info);
+
+                //var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "BotSharp.RestApi.xml");
+                //c.IncludeXmlComments(filePath);
+
+                c.OperationFilter<SwaggerFileUploadOperation>();
+            });
+
+
+
+            //×¢ÈëAddSingleton AddTransient AddScoped
+            services.AddScoped<IAgency_Member_Service, Agency_Member_Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +121,30 @@ namespace MLBot.Wechat
 
                    })
             });
+
+
+            //Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                var info = Configuration.GetSection("Swagger").Get<Info>();
+                //Console.WriteLine($"Swagger:{info.ToJsonString()}");
+
+                c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Patch, SubmitMethod.Delete);
+                c.ShowExtensions();
+                c.SwaggerEndpoint(Configuration.GetValue<String>("Swagger:Endpoint"), info.Title);
+                c.RoutePrefix = String.Empty;
+                c.DocumentTitle = info.Title;
+                c.InjectStylesheet(Configuration.GetValue<String>("Swagger:Stylesheet"));
+
+                Console.WriteLine();
+                Console.WriteLine($"{info.Title} [{info.Version}] {info.License.Name}");
+                Console.WriteLine($"{info.Description}");
+                Console.WriteLine($"{info.Contact.Name}, {DateTime.UtcNow.ToString()}");
+                Console.WriteLine();
+            });
+
+
 
             app.UseMvc(routes =>
             {

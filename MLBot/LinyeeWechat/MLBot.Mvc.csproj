@@ -11,14 +11,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\MLBot\Data\" />
+    <Folder Include="Areas\MLBot\Models\" />
+    <Folder Include="Areas\MLBot\Views\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MLBot.Mvc.Core\MLBot.Mvc.Core.csproj" />
     <ProjectReference Include="..\MLBot_Core\MLBot.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="startmvc.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="StartOnce.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

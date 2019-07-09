@@ -5,7 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Rootspace\Constes\MIME.cs" />
+    <Compile Remove="Rootspace\Services\ITimerService.cs" />
+    <Compile Remove="Rootspace\Services\TimerService.cs" />
+    <Compile Remove="Rootspace\Services\UpdateLastActionService.cs" />
+    <Compile Remove="Rootspace\Utils\PredicateBuilder.cs" />
+    <Compile Remove="Rootspace\Utils\Tools.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="项目说明.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Rootspace\WebClientYh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Rootspace\Constes\" />
   </ItemGroup>
 
 </Project>
