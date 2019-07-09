@@ -32,9 +32,6 @@
     <None Update="startmvc.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="StartOnce.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
