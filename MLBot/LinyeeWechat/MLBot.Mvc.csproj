@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\MLBot\Data\" />
-    <Folder Include="Areas\MLBot\Models\" />
-    <Folder Include="Areas\MLBot\Views\" />
+    <Folder Include="Areas\V1\MLBot\Data\" />
+    <Folder Include="Areas\V1\MLBot\Models\" />
+    <Folder Include="Areas\V1\MLBot\Views\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 

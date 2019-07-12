@@ -5,6 +5,7 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
     /// <summary>
     /// api 基类
     /// </summary>
+    [Route("api/v1/[controller]")]
     [ApiController]
     [Author("Linyee", "2019-07-05")]
     public class BaseApiController : ControllerBase

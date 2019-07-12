@@ -7,7 +7,6 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
     /// <summary>
     /// 代理接口
     /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
     [Author("Linyee", "2019-07-05")]
     public class AgentController : BaseApiController
@@ -44,9 +43,9 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
         /// 获取信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/api/[controller]/GetString/{id}")]
+        [HttpGet("/api/v1/[controller]/GetByPhone/{id}")]
         [Author("Linyee", "2019-07-05")]
-        public ExecuteResult GetString(string id)
+        public ExecuteResult GetByPhone(string id)
         {
             var item= amember_service.Find(new AgentInfo() { Phone=id}.Id);
             if (item.Data != null) item.Data.Password = "";
@@ -109,7 +108,7 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
         /// 更新操作密码
         /// </summary>
         /// <returns></returns>
-        [HttpPut("/api/[controller]/PutNewPwd")]
+        [HttpPut("/api/v1/[controller]/PutNewPwd")]
         [Author("Linyee", "2019-07-05")]
         public ExecuteResult PutNewPwd ([FromBody] AgentInfo agent)
         {
