@@ -14,6 +14,7 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
         /// <summary>
         /// 代理会员服务
         /// </summary>
+        [Author("Linyee", "2019-07-05")]
         private IAgency_Member_Service amember_service;
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
         [Author("Linyee", "2019-07-05")]
         public ExecuteResult Get(Guid id)
         {
-            var item= amember_service.Find(id);
+            var item = amember_service.Find(id);
             if (item.Data != null) item.Data.Password = "";
             return item;
         }
@@ -43,8 +44,9 @@ namespace MLBot.Mvc.Areas.MLBot.Controllers
         /// 获取信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet("/api/v1/[controller]/GetByPhone/{id}")]
+        [HttpGet]//("/api/v1/[controller]/GetByPhone/{id}")
         [Author("Linyee", "2019-07-05")]
+        [Route("[action]/{id}")]
         public ExecuteResult GetByPhone(string id)
         {
             var item= amember_service.Find(new AgentInfo() { Phone=id}.Id);

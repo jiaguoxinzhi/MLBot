@@ -9,6 +9,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.ML" Version="0.14.0" />
+    <PackageReference Include="Microsoft.ML" Version="1.2.0" />
+    <PackageReference Include="Microsoft.ML.FastTree" Version="1.2.0" />
+    <PackageReference Include="Microsoft.ML.Recommender" Version="0.14.0" />
+    <PackageReference Include="Microsoft.ML.TensorFlow" Version="1.2.0" />
+    <PackageReference Include="Microsoft.ML.TimeSeries" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MLBot_Common\MLBot.Common.csproj" />
   </ItemGroup>
 

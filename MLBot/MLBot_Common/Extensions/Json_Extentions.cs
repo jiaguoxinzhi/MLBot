@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MLBot.Extentions;
 
-namespace MLBot.Mvc.Extentions
+namespace MLBot.Extentions
 {
     #region "json转换器"
     /// <summary>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 
-namespace MLBot.Mvc
+namespace MLBot
 {
     /// <summary>
     /// Agency_Member 服务

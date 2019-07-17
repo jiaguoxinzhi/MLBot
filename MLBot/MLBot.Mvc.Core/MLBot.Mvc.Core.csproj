@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MLBot\MLBot\MLBot_Common\MLBot.Common.csproj" />
+    <ProjectReference Include="..\MLBot_Core\MLBot.Core.csproj" />
   </ItemGroup>
 
 </Project>

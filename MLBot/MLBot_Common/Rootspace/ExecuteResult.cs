@@ -4,8 +4,149 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace MLBot.Mvc
+namespace MLBot
 {
+
+
+    /// <summary>
+    /// 统计结果
+    /// </summary>
+    /// <typeparam name="TX">x轴</typeparam>
+    /// <typeparam name="TY">y轴</typeparam>
+    /// <typeparam name="TZ">z轴</typeparam>
+    [Author("Linyee", "2019-07-15")]
+    public class Statistics2DResult<TX, TV> : ExecuteResult<TV>
+    {
+        /// <summary>
+        /// x轴 从左到右
+        /// </summary>
+        [Author("Linyee", "2019-07-11")]
+        public TX[] xAxisData { get; set; }
+
+        /// <summary>
+        /// y轴 从下到上
+        /// </summary>
+        [Author("Linyee", "2019-07-15")]
+        [JsonIgnore]//不要序列化
+        public TV yAxisData { get { return base.Data; } set { base.Data = value; } }
+
+        /// <summary>
+        /// 设置失败
+        /// </summary>
+        /// <param name="msg"></param>
+        [Author("Linyee", "2019-07-15")]
+        public new Statistics2DResult<TX, TV> SetFail(string msg, StatusCodeEnum code = StatusCodeEnum.FAIL)
+        {
+            base.SetFail(msg, code);
+            return this;
+        }
+
+        /// <summary>
+        /// 设置完成
+        /// </summary>
+        /// <param name="msg"></param>
+        [Author("Linyee", "2019-07-15")]
+        public new Statistics2DResult<TX, TV> SetOk(string msg = "Ok")
+        {
+            base.SetOk(msg);
+            return this;
+        }
+    }
+
+
+    /// <summary>
+    /// 统计结果
+    /// </summary>
+    /// <typeparam name="TX">x轴</typeparam>
+    /// <typeparam name="TY">y轴</typeparam>
+    /// <typeparam name="TZ">z轴</typeparam>
+    [Author("Linyee", "2019-07-11")]
+    public class Statistics3DResult<TX, TY, TZ> : ExecuteResult<List<TZ>>
+    {
+        /// <summary>
+        /// 最顶阀值
+        /// </summary>
+        [Author("Linyee", "2019-07-15")]
+        public decimal maxRange { get; set; }
+        /// <summary>
+        /// 最底阀值
+        /// </summary>
+        [Author("Linyee", "2019-07-16")]
+        public decimal minRange { get; set; }
+
+        /// <summary>
+        /// x轴 从左到右
+        /// </summary>
+        [Author("Linyee", "2019-07-11")]
+        public TX[] xAxisData { get; set; }
+
+        /// <summary>
+        /// y轴 从近到远
+        /// </summary>
+        [Author("Linyee", "2019-07-11")]
+        public TY[] yAxisData { get; set; }
+
+        ///// <summary>
+        ///// z轴 从下到上
+        ///// </summary>
+        //[Author("Linyee", "2019-07-11")]
+        //[JsonIgnore]//不要序列化
+        //public TZ[] zAxisData { get { return base.Data?.ToArray(); } set {
+        //        base.Data = value?.ToList();
+        //        if (values.Count < 1) values.Add(new TZ[0]);
+        //        values[0] = value;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //[Author("Linyee", "2019-07-16")]
+        //[JsonIgnore]//不要序列化
+        //public new List<TZ> Data { get { return base.Data; }
+        //    set {
+        //        base.Data = value;
+        //        if (values.Count < 1) values.Add(new TZ[0]);
+        //        values[0] = value?.ToArray();
+        //    }
+        //}
+
+        /// <summary>
+        /// 多个值系
+        /// </summary>
+        [Author("Linyee", "2019-07-16")]
+        public List<TZ[]> values { get; set; } = new List<TZ[]>();
+
+        /// <summary>
+        /// 多个值系 名称 数量需要与values一致，否则可能异常
+        /// </summary>
+        [Author("Linyee", "2019-07-16")]
+        public List<string> valuenames { get; set; } = new List<string>();
+
+        /// <summary>
+        /// 设置失败
+        /// </summary>
+        /// <param name="msg"></param>
+        [Author("Linyee", "2019-07-11")]
+        public new Statistics3DResult<TX, TY, TZ> SetFail(string msg, StatusCodeEnum code = StatusCodeEnum.FAIL)
+        {
+            base.SetFail(msg, code);
+            return this;
+        }
+
+        /// <summary>
+        /// 设置完成
+        /// </summary>
+        /// <param name="msg"></param>
+        [Author("Linyee", "2019-07-11")]
+        public new Statistics3DResult<TX, TY, TZ> SetOk(string msg = "Ok")
+        {
+            base.SetOk(msg);
+            return this;
+        }
+    }
+
+
     /// <summary>
     /// 执行结果
     /// </summary>

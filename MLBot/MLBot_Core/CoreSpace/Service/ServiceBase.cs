@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
-using MLBot.Mvc.Extentions;
+using MLBot.Extentions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MLBot.Mvc
+namespace MLBot
 {
     /// <summary>
     /// 基础 服务

@@ -79,6 +79,7 @@ namespace MLBot.Mvc
 
             //×¢ÈëAddSingleton AddTransient AddScoped
             services.AddScoped<IAgency_Member_Service, Agency_Member_Service>();
+            services.AddScoped<IAgency_Trainer_Service, Agency_Trainer_Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

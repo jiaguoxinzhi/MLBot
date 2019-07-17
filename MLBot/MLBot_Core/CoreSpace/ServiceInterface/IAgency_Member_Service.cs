@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MLBot.Mvc
+namespace MLBot
 {
     /// <summary>
     /// Agency_Member 服务

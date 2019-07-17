@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MLBot.Extentions;
 
-namespace MLBot.Mvc
+namespace MLBot
 {
     /// <summary>
     /// 代理信息
