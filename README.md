@@ -1,3 +1,7 @@
+# 项目地址：
+[码云上](https://gitee.com/linyee/MLBot) 原则上会优先维护与及更新
+[github上](https://github.com/jiaguoxinzhi/MLBot)
+
 # MLBot
 高智能机器人 High intelligent robot，基于ML.NET Based on ML.NET
 
