@@ -18,11 +18,13 @@ namespace MLBot
         /// </summary>
         [Author("Linyee", "2019-04-24")]
         public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+
         /// <summary>
         /// 是否Windows系统
         /// </summary>
         [Author("Linyee", "2019-04-24")]
         public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
         /// <summary>
         /// 是否OSX系统
         /// </summary>

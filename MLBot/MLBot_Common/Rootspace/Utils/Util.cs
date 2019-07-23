@@ -25,6 +25,9 @@ namespace MLBot
         [Author("Linyee", "2019-03-07")]
         public static object CopyAFromB(object a, object b)
         {
+            if (b == null) return a;
+            if (a == null) return a;
+
             var btype = b.GetType();
             foreach (var ap in a.GetType().GetProperties())
             {
