@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MLBot.Extentions
@@ -91,6 +92,46 @@ namespace MLBot.Extentions
             }
             return false;
         }
+
+
+        /// <summary>
+        /// 是否含有汉字
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-24")]
+        public static bool ContainChinese(this string input)
+        {
+            string pattern = "[\u3400-\u4DB5\u4DC0-\u9FBB]";
+            return Regex.IsMatch(input, pattern);
+        }
+
+        /// <summary>
+        /// 是否汉字
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-25")]
+        public static bool IsChinese(this char input)
+        {
+            if (input == '\0') return false;
+            return false
+                || input >= '\u3400' && input <= '\u4DB5'
+                || input >= '\u4DC0' && input <= '\u9FBB'
+              ;
+        }
+
+        /// <summary>
+        /// 是否英文
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-25")]
+        public static bool IsAsc(this char input)
+        {
+            return input >= '\x20' && input <= '\x7e';//可视字符
+        }
+
         #endregion
 
         #region "转换"
