@@ -537,7 +537,6 @@ namespace MLBot.NLTK.Analyzers
             //保存子词典
             foreach (var sub in subdicts)
             {
-                sub.SaveThread();
                 sub.OpenSaveCloseSave();
             }
 

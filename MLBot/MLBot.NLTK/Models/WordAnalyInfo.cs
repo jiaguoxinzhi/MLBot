@@ -79,7 +79,7 @@ namespace MLBot.NLTK.Models
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-07-24")]
-        public WordAnalyResult<T> SetFail(string msg)
+        public WordAnalyResult<T> SetFail(string msg="Fail")
         {
             this.State = StatusCodeEnum.FAIL;
             this.Desc = msg;
@@ -91,9 +91,10 @@ namespace MLBot.NLTK.Models
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-07-24")]
-        public WordAnalyResult<T> SetOk()
+        public WordAnalyResult<T> SetOk(string msg="OK")
         {
             this.State = StatusCodeEnum.OK;
+            this.Desc = msg;
             return this;
         }
 
@@ -108,6 +109,7 @@ namespace MLBot.NLTK.Models
             {
                 Data = obj.Data,
                 State = obj.State,
+                Desc = obj.Desc,
             };
         }
     }
