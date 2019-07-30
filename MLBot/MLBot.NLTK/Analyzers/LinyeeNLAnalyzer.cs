@@ -10,6 +10,8 @@ using MLBot.Enums;
 using System.Diagnostics;
 using MLBot.NLTK.Models;
 using MLBot.NLTK.Abstracts;
+using JiebaNet.Segmenter.PosSeg;
+using JiebaNet.Segmenter;
 
 namespace MLBot.NLTK.Analyzers
 {
@@ -139,6 +141,24 @@ namespace MLBot.NLTK.Analyzers
             return new WordInfoOnce(text);
         }
         #endregion
+
+        /// <summary>
+        /// 分词
+        /// 默认UTF8编码
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-30")]
+        public WordAnalyResult WordAnalyJieba(string text, Encoding encoding = null)
+        {
+            if (ConfigBase.Default.IsTraceStack) LogService.AnyLog("Stack", new StackTrace().GetFrame(0).GetMethod().ToString());
+            if (string.IsNullOrEmpty(text)) return WordAnalyResult.Empty;
+            var segmenter = new JiebaSegmenter();
+            return new WordAnalyResult().SetData(segmenter.Cut(text));
+            //var posSeg = new PosSegmenter(segmenter);
+            //return posSeg.Cut(text, hmm).Select(token => string.Format("{0}/{1}", token.Word, token.Flag));
+
+        }
 
         /// <summary>
         /// 分词

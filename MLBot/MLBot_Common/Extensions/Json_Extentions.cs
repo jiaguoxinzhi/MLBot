@@ -143,13 +143,14 @@ namespace MLBot.Extentions
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ToJsonString(this object obj, NullValueHandling valueHandling= NullValueHandling.Include)
+        public static string ToJsonString(this object obj, NullValueHandling valueHandling= NullValueHandling.Include, Formatting formatting= Formatting.None)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.DateFormatString = "yyyy-MM-dd HH:mm:ss.fffffff";
             settings.NullValueHandling = valueHandling;// NullValueHandling.Include;
             settings.MissingMemberHandling = MissingMemberHandling.Ignore;
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            settings.Formatting = formatting;
             //settings.StringEscapeHandling = StringEscapeHandling.EscapeNonAscii;//加了这个会变成unicode编码 \u00e6\u0088
 
             settings.Converters.Add(new NameValueJsonConverter());
