@@ -93,6 +93,10 @@ namespace MLBot.Extentions
             return false;
         }
 
+        /// <summary>
+        /// 中文
+        /// </summary>
+        private static Regex cnReg = new Regex("[\u3400-\u4DB5\u4DC0-\u9FBB]", RegexOptions.Compiled);
 
         /// <summary>
         /// 是否含有汉字
@@ -102,8 +106,7 @@ namespace MLBot.Extentions
         [Author("Linyee", "2019-07-24")]
         public static bool ContainChinese(this string input)
         {
-            string pattern = "[\u3400-\u4DB5\u4DC0-\u9FBB]";
-            return Regex.IsMatch(input, pattern);
+            return cnReg.IsMatch(input);
         }
 
         /// <summary>
@@ -122,15 +125,68 @@ namespace MLBot.Extentions
         }
 
         /// <summary>
+        /// 英文 语句
+        /// </summary>
+        internal static readonly Regex RegexEnglishLine = new Regex(@"^[a-zA-Z0-9０-９ａ-ｚＡ-Ｚ]+$", RegexOptions.Compiled);
+
+        /// <summary>
         /// 是否英文
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-25")]
+        public static bool IsEn(this string input)
+        {
+            return RegexEnglishLine.IsMatch(input);
+        }
+
+        /// <summary>
+        /// 是否Asc可视字符
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [Author("Linyee", "2019-07-25")]
         public static bool IsAsc(this char input)
         {
-            return input >= '\x20' && input <= '\x7e';//可视字符
+            return input >= '\x20' && input <= '\x7e';
         }
+
+        private static Regex zhNumber = new Regex("[〇一二三四五六七八九十百千万亿]",    RegexOptions.Compiled);
+        private static Regex twNumber = new Regex("[零壹贰叁肆伍陆柒捌玖拾佰仟萬]", RegexOptions.Compiled);
+        //private static Regex chNumberUnit = new Regex("[十百千万亿兆京垓杼穰沟涧正载极]", RegexOptions.Compiled);
+
+        /// <summary>
+        /// 是否数字
+        /// Asc码中的数字
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-25")]
+        public static bool IsNumber(this char input)
+        {
+            return input >= '0' && input <= '9';// || zhNumber.IsMatch(key) || twNumber.IsMatch(key);//可视字符
+        }
+
+        /// <summary>
+        /// 是否标点符号
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-07-25")]
+        public static bool IsSymbol(this char input)
+        {
+            var key = input.ToString();
+            return input >= '\x20' && input <= '\x2f' ||
+                input >= '\x3A' && input <= '\x40' ||
+                input >= '\x5B' && input <= '\x60' ||
+                input >= '\x7B' && input <= '\x7E' ||
+                input >= '\uFE10' && input <= '\uFF10' ||
+                input >= '\uFE1A' && input <= '\uFF20' ||
+                input >= '\uFE3B' && input <= '\uFF40' ||
+                input >= '\uFF5B' && input <= '\uFF65'
+               ;// || zhNumber.IsMatch(key) || twNumber.IsMatch(key);//可视字符
+        }
+
 
         #endregion
 
