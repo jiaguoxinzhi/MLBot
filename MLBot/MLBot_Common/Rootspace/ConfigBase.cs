@@ -42,6 +42,13 @@ namespace MLBot
         /// </summary>
         [Author("Linyee", "2019-05-12")]
         public bool IsTraceHex { get; set; } = false;
+
+        /// <summary>
+        /// 是否跟踪堆栈信息
+        /// </summary>
+        [Author("Linyee", "2019-07-27")]
+        public bool IsTraceStack { get; set; } = false;
+
         /// <summary>
         /// 是否输出异常信息
         /// </summary>
@@ -90,6 +97,7 @@ namespace MLBot
             this.IsWebSocket10Minute = true;
             this.IsWebSocketClient10Minute = true;
             this.IsTraceRSMSG = true;
+            this.IsTraceStack = true;
         }
 
         /// <summary>
@@ -107,6 +115,7 @@ namespace MLBot
             this.IsWebSocket10Minute = false;
             this.IsWebSocketClient10Minute = false;
             this.IsTraceRSMSG = false;
+            this.IsTraceStack = false;
         }
 
         /// <summary>
@@ -124,6 +133,7 @@ namespace MLBot
             this.IsWebSocket10Minute = false;
             this.IsWebSocketClient10Minute = false;
             this.IsTraceRSMSG = false;
+            this.IsTraceStack = false;
         }
 
 
@@ -146,6 +156,7 @@ namespace MLBot
             this.IsTraceRSMSG = configuration.IsTraceRSMSG;
             this.IsWebSocket10Minute = configuration.IsWebSocket10Minute;
             this.IsWebSocketClient10Minute = configuration.IsWebSocketClient10Minute;
+            this.IsTraceStack = configuration.IsTraceStack;
             return this;
         }
 
