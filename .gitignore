@@ -292,3 +292,4 @@ __pycache__/
 *.RestApi.xml
 /BotSharp.WebHost/App_Data/AgentStorage
 /BotSharp.WebHost/App_Data/SessionStorage
+/MLBot/MLBot_Common/dotnetrestore.bat
