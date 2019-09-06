@@ -42,9 +42,16 @@ namespace Tencent
         };
 
         //构造函数
-	    // @param sToken: 公众平台上，开发者设置的Token
-	    // @param sEncodingAESKey: 公众平台上，开发者设置的EncodingAESKey
-	    // @param sAppID: 公众帐号的appid
+        // @param sToken: 公众平台上，开发者设置的Token
+        // @param sEncodingAESKey: 公众平台上，开发者设置的EncodingAESKey
+        // @param sAppID: 公众帐号的appid
+
+        /// <summary>
+        /// 微信官方加解密类
+        /// </summary>
+        /// <param name="sToken">公众平台上，开发者设置的Token</param>
+        /// <param name="sEncodingAESKey">公众平台上，开发者设置的EncodingAESKey</param>
+        /// <param name="sAppID">公众帐号的appid</param>
         public WXBizMsgCrypt(string sToken, string sEncodingAESKey, string sAppID)
         {
             m_sToken = sToken;

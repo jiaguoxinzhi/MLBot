@@ -77,8 +77,6 @@ namespace MLBot.Mvc.Areas.WxWebHook.Controllers
                 Msg_Signature = msg_signature,
             };
 
-
-
             try
             {
                 //加密异常
