@@ -1,11 +1,11 @@
-# 项目地址：
+# 解决方案地址：
 * [码云上](https://gitee.com/linyee/MLBot) 原则上会优先维护与及更新
 * [github上](https://github.com/jiaguoxinzhi/MLBot)
 
 # MLBot
 高智能机器人 High intelligent robot，基于ML.NET Based on ML.NET
 
-# 项目依赖项
+# 解决方案依赖项
 主要依赖ML.NET 其它依赖都尽可能使用知名度高且比较通用的依赖 以上两项依赖都解决不了，在解决方案里另起子项目以解决问题。
 
 ## 分词器 MLBot.NLTK
