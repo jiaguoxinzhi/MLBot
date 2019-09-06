@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MLBot.Mvc.WechatMP;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -24,6 +25,12 @@ namespace MLBot.Mvc
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            WechatMpSettings.Default = configuration.GetSection("WeChatMpSettings").Get<WechatMpSettings>();
+            if (string.IsNullOrEmpty(WechatMpSettings.Default.AppId))
+            {
+                "请先配置 WeChatMpSettings 项".WriteErrorLine();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -79,7 +86,9 @@ namespace MLBot.Mvc
 
             //注入AddSingleton AddTransient AddScoped
             services.AddScoped<IAgency_Member_Service, Agency_Member_Service>();
-            services.AddScoped<IAgency_Trainer_Service, Agency_Trainer_Service>();
+            //services.AddScoped<IAgency_Trainer_Service, Agency_Trainer_Service>();
+            //服务
+            services.AddHostedService<WechatCustomService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -144,8 +153,6 @@ namespace MLBot.Mvc
                 Console.WriteLine($"{info.Contact.Name}, {DateTime.UtcNow.ToString()}");
                 Console.WriteLine();
             });
-
-
 
             app.UseMvc(routes =>
             {

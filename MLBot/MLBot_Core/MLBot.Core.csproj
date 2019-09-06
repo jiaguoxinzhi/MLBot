@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CoreSpace\Service\Agency_Trainer_Service.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="项目说明.md" />
   </ItemGroup>
 

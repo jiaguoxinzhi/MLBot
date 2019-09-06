@@ -88,9 +88,9 @@ namespace MLBot.Extentions
         /// <param name="encode">指定加密编码</param>  
         /// <returns>返回40位大写字符串</returns>  
         [Author("Linyee", "2019-05-19")]
-        public static string SHA1(this string content, Encoding encoding = null)
+        public static string ToSHA1(this string content, Encoding encoding = null)
         {
-            byte[] bytes_out = SHA1Raw(content, encoding);
+            byte[] bytes_out = ToSHA1Raw(content, encoding);
             string result = BitConverter.ToString(bytes_out);
             result = result.Replace("-", "");
             return result;
@@ -103,7 +103,7 @@ namespace MLBot.Extentions
         /// <param name="encode">指定加密编码</param>  
         /// <returns>返回40位大写字符串</returns>  
         [Author("Linyee", "2019-05-19")]
-        public static string SHA1Base64(this string content, Encoding encoding = null)
+        public static string ToSHA1Base64(this string content, Encoding encoding = null)
         {
 
             //SHA1 sha1 = new SHA1CryptoServiceProvider();
@@ -111,7 +111,7 @@ namespace MLBot.Extentions
             //byte[] bytes_sha1_out = sha1.ComputeHash(bytes_sha1_in);
             //string str_sha1_out = Convert.ToBase64String(bytes_sha1_out);
             //return str_sha1_out;
-            byte[] bytes_out = SHA1Raw(content, encoding);
+            byte[] bytes_out = ToSHA1Raw(content, encoding);
             return Convert.ToBase64String(bytes_out);
         }
 
@@ -122,7 +122,7 @@ namespace MLBot.Extentions
         /// <param name="encode">指定加密编码</param>  
         /// <returns>返回40位大写字符串</returns>  
         [Author("Linyee", "2019-05-19")]
-        public static byte[] SHA1Raw(this string content, Encoding encoding = null)
+        public static byte[] ToSHA1Raw(this string content, Encoding encoding = null)
         {
             var encode = Encoding.UTF8;
             if (encoding != null) encode = encoding;
@@ -135,5 +135,57 @@ namespace MLBot.Extentions
         }
         #endregion
 
-    }
+        #region AES
+        /// <summary>
+        ///  AES 加密
+        /// </summary>
+        /// <param name="str">明文（待加密）</param>
+        /// <param name="key">密文</param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-05-19")]
+        public static string AesEncrypt(this string str, string key)
+        {
+            if (string.IsNullOrEmpty(str)) return null;
+            Byte[] toEncryptArray = Encoding.UTF8.GetBytes(str);
+
+            RijndaelManaged rm = new RijndaelManaged
+            {
+                Key = Encoding.UTF8.GetBytes(key),
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.PKCS7
+            };
+
+            ICryptoTransform cTransform = rm.CreateEncryptor();
+            Byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+        }
+
+        /// <summary>
+        ///  AES 解密
+        /// </summary>
+        /// <param name="str">明文（待解密）</param>
+        /// <param name="key">密文</param>
+        /// <returns></returns>
+        [Author("Linyee", "2019-05-19")]
+        public static string AesDecrypt(this string str, string key)
+        {
+            if (string.IsNullOrEmpty(str)) return null;
+            Byte[] toEncryptArray = Convert.FromBase64String(str);
+
+            RijndaelManaged rm = new RijndaelManaged
+            {
+                Key = Encoding.UTF8.GetBytes(key),
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.PKCS7
+            };
+
+            ICryptoTransform cTransform = rm.CreateDecryptor();
+            Byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+            return Encoding.UTF8.GetString(resultArray);
+        }
+    #endregion
+
+}
 }

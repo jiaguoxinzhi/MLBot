@@ -11,10 +11,10 @@ namespace MLBot
     /// web客户端
     /// </summary>
     [Author("Linyee", "2018-05-05")]
-    public class WebClientYh : WebClient
+    public class WebClientLy : WebClient
     {
         [Author("Linyee", "2018-05-05")]
-        static WebClientYh()
+        static WebClientLy()
         {
             // 解决WebClient不能通过https下载内容问题
             ServicePointManager.ServerCertificateValidationCallback +=

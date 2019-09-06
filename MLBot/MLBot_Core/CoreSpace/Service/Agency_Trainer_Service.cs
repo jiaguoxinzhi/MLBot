@@ -5,6 +5,8 @@ using System.Text;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.ML;
+using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 
 namespace MLBot
 {
@@ -33,19 +35,19 @@ namespace MLBot
                     ;
             // Create data preparation transformer
             ITransformer dataPrepTransformer = dataPrepEstimator.Fit(data);
-            Console.WriteLine("数据准备 填充完成");
+            //Console.WriteLine("数据准备 填充完成");
             // Pre-process data using data prep operations
             IDataView transformedData = dataPrepTransformer.Transform(data);
-            Console.WriteLine($"数据视图： {Newtonsoft.Json.JsonConvert.SerializeObject(mlContext.Data.CreateEnumerable<TransformedHousingData>(transformedData, true))}");
+            //Console.WriteLine($"数据视图： {Newtonsoft.Json.JsonConvert.SerializeObject(mlContext.Data.CreateEnumerable<TransformedHousingData>(transformedData, true))}");
 
             // Define StochasticDualCoordinateAscent regression algorithm estimator
             var sdcaEstimator = mlContext.Regression.Trainers.Sdca();//labelColumnName: "Label", featureColumnName: "Features"
             //var sdcaEstimator = mlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
 
-            Console.WriteLine("正在训练");
+            //Console.WriteLine("正在训练");
             // Train regression model
             RegressionPredictionTransformer<LinearRegressionModelParameters> trainedModel = sdcaEstimator.Fit(transformedData);
-            Console.WriteLine("训练完成");
+            //Console.WriteLine("训练完成");
 
             // Save Data Prep transformer
             mlContext.Model.Save(dataPrepTransformer, data.Schema, "data_preparation_pipeline.zip");

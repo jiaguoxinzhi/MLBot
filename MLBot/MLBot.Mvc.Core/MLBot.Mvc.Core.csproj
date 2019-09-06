@@ -21,4 +21,9 @@
     <ProjectReference Include="..\MLBot_Core\MLBot.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Modles\" />
+  </ItemGroup>
+
 </Project>
