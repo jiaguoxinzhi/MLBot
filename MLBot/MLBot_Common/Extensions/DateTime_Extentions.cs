@@ -23,6 +23,7 @@ namespace MLBot.Extentions
         {
             return (UInt32)(dt - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
         }
+
         /// <summary>
         /// 13位时间戳
         /// 从1970-1-1开始毫秒数
@@ -59,7 +60,7 @@ namespace MLBot.Extentions
             {
                 throw new Exception("不是有效时间戳");
             }
-        return dt.ToLocalTime();
+            return dt.ToLocalTime();
         }
 
         /// <summary>
