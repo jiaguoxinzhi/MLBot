@@ -107,6 +107,7 @@ namespace MLBot.Mvc.Areas.WxWebHook.Controllers
 
                 WechatResponse wxsponse = new WechatResponse(Request, PostXml);
                 var botsponse= wxsponse.Rebot();
+                LogService.AnyLog("WeChatWebHook", "响应源数据", $"{botsponse.Content}");
                 //加密信息
                 if (encrypt_type == "aes")
                 {
@@ -123,7 +124,7 @@ namespace MLBot.Mvc.Areas.WxWebHook.Controllers
                         $"{rb} EncryptMsg".WriteErrorLine();
                     }
                 }
-                LogService.AnyLog("WeChatWebHook","响应数据", $"{botsponse.Content}");
+                LogService.AnyLog("WeChatWebHook","响应密数据", $"{botsponse.Content}");
                 return botsponse;
             }
             catch (Exception ex)

@@ -219,6 +219,12 @@ namespace MLBot.Mvc.WechatMP
                             RebotContext rc = null;
                             string rcrkey = null;
                             RebotChatRecord rcr = null;
+                            var botres= MLAiBot.Default.Processing(PostContent);
+                            if (botres.IsOk)
+                            {
+                                _=GetTextResponse(botres.Msg);
+                                return this;
+                            }
 
                             //数字
                             if (dblBodyRegex.IsMatch(PostContent))
@@ -275,78 +281,6 @@ namespace MLBot.Mvc.WechatMP
 
                             }
 
-                            //问时间
-                            if (new Regex(regHeaderString + "(现在)?几点[了]?[\\?]?" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent) || new Regex(regHeaderString + "(给我)?报[个]?时[.,。，！!]?" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent))
-                            {
-                                _ = GetTextResponse(
-                                    times[RandomNumber.GetRndInt(0, times.Count - 1)]
-                                    .Replace("$date$", dtnow.ToString("yyyy-MM-dd"))
-                                    .Replace("$time$", dtnow.ToString("HH:mm")));
-
-                                if (rcr != null)
-                                {
-                                    rcr.Records.Add(new ChatRecordInfo()
-                                    {
-                                        Q = PostContent,
-                                        A = Content,
-                                        T = "被问时间",
-                                        P = 1,
-                                        RT = dtday_1,
-                                        DT = DateTime.Now,
-                                        IM = 0.01,
-                                    });
-                                }
-                                return this;
-                            }
-
-                            //问时间
-                            if (new Regex(regHeaderString + "(今天[是]?)?几号[了]?[\\?]*" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent) || new Regex(regHeaderString + "(今天[是]?)?的日期[是]?[\\?]*" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent))
-                            {
-                                _ = GetTextResponse(
-                                    dates[RandomNumber.GetRndInt(0, dates.Count - 1)]
-                                    .Replace("$date$", dtnow.ToString("yyyy-MM-dd"))
-                                    .Replace("$time$", dtnow.ToString("HH:mm")));
-
-                                if (rcr != null)
-                                {
-                                    rcr.Records.Add(new ChatRecordInfo()
-                                    {
-                                        Q = PostContent,
-                                        A = Content,
-                                        T = "被问时间",
-                                        P = 1,
-                                        RT = dtday_1,
-                                        DT = DateTime.Now,
-                                        IM = 0.01,
-                                    });
-                                }
-                                return this;
-                            }
-
-                            //问时间
-                            if (new Regex(regHeaderString + "(今天[是]?)?(星期|周)[几]?[了]?[\\?]*" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent))
-                            {
-                                _ = GetTextResponse(
-                                    wdays[RandomNumber.GetRndInt(0, wdays.Count - 1)]
-                                    .Replace("$date$", dtnow.ToString("yyyy-MM-dd"))
-                                    .Replace("$weekday$", "星期" + dtnow.DayOfWeek.ToString("d"))
-                                    );
-
-                                if (rcr != null)
-                                {
-                                    rcr.Records.Add(new ChatRecordInfo()
-                                    {
-                                        Q = PostContent,
-                                        A = Content,
-                                        T = "被问时间",
-                                        P = 1,
-                                        RT = dtday_1,
-                                        DT = DateTime.Now,
-                                        IM = 0.01,
-                                    });
-                                }
-                                return this;
-                            }
 
                             //闹钟服务
                             var alaim = setAlaim1.Match(PostContent);
