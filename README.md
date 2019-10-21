@@ -29,6 +29,7 @@
 * 微软小冰
 * 图灵机器人：（好像收费，自己找吧）
 * [BotSharp](https://github.com/SciSharp/BotSharp)
+* [思知](https://www.ownthink.com/)
 
 # 词汇解释
 * IQ：Intelligence Quotient，智力商数，简称智商。学习能力、实践能力。
