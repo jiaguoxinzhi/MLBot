@@ -54,5 +54,5 @@
 * …后期版本计划增加ASR、意图识别能力、KG、TTS。
 
 # 参考
-1. [Seq2SeqLearn][https://github.com/mashmawy/Seq2SeqLearn]
+1. [Seq2SeqLearn](https://github.com/mashmawy/Seq2SeqLearn)
 2. chatterbot-1k 抱歉，忘了是从哪里下的。
