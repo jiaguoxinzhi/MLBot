@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MLBot\MLBot\MLBot_Common\MLBot.Common.csproj" />
+    <ProjectReference Include="..\LinyeeSeq2Seq\LinyeeSeq2Seq.csproj" />
+    <ProjectReference Include="..\MLBot.NLTK\MLBot.NLTK.csproj" />
     <ProjectReference Include="..\MLBot_Core\MLBot.Core.csproj" />
   </ItemGroup>
 

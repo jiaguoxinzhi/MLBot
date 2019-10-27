@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ContextDecoder.cs" />
+    <Compile Remove="ContextSeq2Seq.cs" />
+    <Compile Remove="Decoder.cs" />
+    <Compile Remove="LSTMContextDecoderCell.cs" />
+    <Compile Remove="Models\ModelData.cs" />
+    <Compile Remove="Tools\WeightMatrix.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MLBot_Common\MLBot.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -149,12 +149,12 @@ namespace MLBot.NLTK.Analyzers
         /// <param name="text"></param>
         /// <returns></returns>
         [Author("Linyee", "2019-07-30")]
-        public WordAnalyResult WordAnalyJieba(string text, Encoding encoding = null)
+        public WordAnalyResult<List<string>> WordAnalyJieba(string text, Encoding encoding = null)
         {
             if (ConfigBase.Default.IsTraceStack) LogService.AnyLog("Stack", new StackTrace().GetFrame(0).GetMethod().ToString());
-            if (string.IsNullOrEmpty(text)) return WordAnalyResult.Empty;
+            if (string.IsNullOrEmpty(text)) return WordAnalyResult<List<string>>.Empty;
             var segmenter = new JiebaSegmenter();
-            return new WordAnalyResult().SetData(segmenter.Cut(text));
+            return new WordAnalyResult<List<string>>().SetData(segmenter.Cut(text).ToList());
             //var posSeg = new PosSegmenter(segmenter);
             //return posSeg.Cut(text, hmm).Select(token => string.Format("{0}/{1}", token.Word, token.Flag));
 

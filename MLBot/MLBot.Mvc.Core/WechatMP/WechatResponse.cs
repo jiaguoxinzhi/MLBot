@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LinyeeSeq2Seq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MLBot.Extentions;
 using MLBot.Mvc.Extentions;
+using MLBot.NLTK.Analyzers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -199,6 +201,12 @@ namespace MLBot.Mvc.WechatMP
         [Author("Linyee", "2019-04-01")]
         internal static Regex ArithmeticRegex = new Regex($"{regHeaderString}((帮我)?计算)?(\\s*{ArithmeticValue}\\s*[\\+\\-\\*/^&|]\\s*)+{ArithmeticValue}(=\\??)?{regEnderString}", RegexOptions.Compiled);
 
+        /// <summary>
+        /// 对话机器人，或其它机器人
+        /// </summary>
+        internal static Dictionary<int, Seq2Seq> s2ses = new Dictionary<int, Seq2Seq>() {
+            { 0,Seq2Seq.Load()}
+        };
 
         /// <summary>
         /// 微信公众号机器人
@@ -398,6 +406,37 @@ namespace MLBot.Mvc.WechatMP
                                     });
                                 }
                                 return this;
+                            }
+
+                            //意图或问题分类
+                            var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent).Data;
+                            var yt = 0;
+                            //根据意图不同使用不同类型
+                            var s2s = s2ses[yt];
+                            switch (yt)
+                            {
+                                case 0:
+                                default:
+                                    var sres= s2s.Predict(words);
+                                    if (sres.IsOk)
+                                    {
+                                        _ = GetTextResponse(string.Join("",sres.Data));
+                                        if (rcr != null)
+                                        {
+                                            rcr.Records.Add(new ChatRecordInfo()
+                                            {
+                                                Q = PostContent,
+                                                A = Content,
+                                                T = "对话",
+                                                P = 0,
+                                                //RT = -1,
+                                                DT = DateTime.Now,
+                                                IM = 0.01,
+                                            });
+                                        }
+                                        return this;
+                                    }
+                                    break;
                             }
 
                             //不能处理

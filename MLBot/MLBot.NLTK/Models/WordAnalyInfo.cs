@@ -36,7 +36,7 @@ namespace MLBot.NLTK.Models
         /// 空
         /// </summary>
         [Author("Linyee", "2019-07-17")]
-        public static readonly WordAnalyResult Empty = new WordAnalyResult();
+        public static readonly WordAnalyResult<T> Empty = new WordAnalyResult<T>();
 
         /// <summary>
         /// 数据
