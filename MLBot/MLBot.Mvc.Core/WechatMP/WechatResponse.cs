@@ -253,10 +253,10 @@ namespace MLBot.Mvc.WechatMP
                                         res = PostContent;
                                         //return GetTextResponse(PostContent);
                                         break;
-                                    default:
-                                        res = $@"亲，小优暂时不能理解{PostContent}的意思。请使用更具体的文字来表述或通过其它途径获得解答。";
-                                        //return GetTextResponse($@"亲，小优暂时不能理解{PostContent}的意思。请使用更具体的文字来表述或通过其它途径获得解答。");
-                                        break;
+                                        //default:
+                                        //    res = $@"亲，小玉暂时不能理解{PostContent}的意思。请使用更具体的文字来表述或通过其它途径获得解答。";
+                                        //    //return GetTextResponse($@"亲，小玉暂时不能理解{PostContent}的意思。请使用更具体的文字来表述或通过其它途径获得解答。");
+                                        //    break;
 
 
                                 }
@@ -287,6 +287,32 @@ namespace MLBot.Mvc.WechatMP
 
                                 return this;
 
+                            }
+
+                            //算术表达式
+                            if (ArithmeticRegex.IsMatch(PostContent))
+                            {
+                                var res = rc.Exp_Cal_Async(PostContent).Result;
+                                if (res.IsOk)
+                                {
+                                    _ = GetTextResponse(res);
+                                }
+
+                                if (rcr != null)
+                                {
+                                    rcr.Records.Add(new ChatRecordInfo()
+                                    {
+                                        Q = PostContent,
+                                        A = Content,
+                                        T = "算术",
+                                        P = 1,
+                                        //RT= dtday_1,
+                                        DT = DateTime.Now,
+                                        IM = 0.01,
+                                    });
+                                    //cache.Replace(rcrkey, rcr);
+                                }
+                                if (res.IsOk) return this;
                             }
 
 
@@ -351,7 +377,7 @@ namespace MLBot.Mvc.WechatMP
                             //招呼
                             if (new Regex(regHeaderString + "[你您]好[!.。！,，]" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent))
                             {
-                                _ = GetTextResponse("您好，我是小优，正在为您服务！");
+                                _ = GetTextResponse("您好，我是小玉，正在为您服务！");
                                 if (rcr != null)
                                 {
                                     rcr.Records.Add(new ChatRecordInfo()
@@ -371,7 +397,7 @@ namespace MLBot.Mvc.WechatMP
                             //回应感谢
                             if (new Regex(regHeaderString + "谢谢[您你]?[啦了]?[!.。！,，]" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent))
                             {
-                                _ = GetTextResponse("能为您服务，是小优的荣幸！");
+                                _ = GetTextResponse("能为您服务，是小玉的荣幸！");
                                 if (rcr != null)
                                 {
                                     rcr.Records.Add(new ChatRecordInfo()
@@ -391,7 +417,7 @@ namespace MLBot.Mvc.WechatMP
                             //再见
                             if (new Regex(regHeaderString + "再见[啦了]?[!.。！,，]" + regEnderString, RegexOptions.Compiled).IsMatch(PostContent))
                             {
-                                _ = GetTextResponse("能为您服务，是小优的荣幸，期待您的再次光临！");
+                                _ = GetTextResponse("能为您服务，是小玉的荣幸，期待您的再次光临！");
                                 if (rcr != null)
                                 {
                                     rcr.Records.Add(new ChatRecordInfo()
@@ -409,7 +435,7 @@ namespace MLBot.Mvc.WechatMP
                             }
 
                             //意图或问题分类
-                            var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent).Data;
+                            var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent.ToLower()).Data;//暂时全转小写
                             var yt = 0;
                             //根据意图不同使用不同类型
                             var s2s = s2ses[yt];
@@ -418,6 +444,7 @@ namespace MLBot.Mvc.WechatMP
                                 case 0:
                                 default:
                                     var sres= s2s.Predict(words);
+                                    LogService.AnyLog("WxRebotNoSuper","seq2seq预测", $"{sres.ToJsonString()}");
                                     if (sres.IsOk)
                                     {
                                         _ = GetTextResponse(string.Join("",sres.Data));
@@ -440,8 +467,8 @@ namespace MLBot.Mvc.WechatMP
                             }
 
                             //不能处理
-                            LogService.AnyLog("WxRebotNoSuper", $@"小优未能处理信息：{PostXml}");
-                            _ = GetTextResponse($@"亲，小优暂时不能理解您的信息，已收妥保存信息。请切换服务方式或通过其它途径获得解答。");
+                            LogService.AnyLog("WxRebotNoSuper", $@"小玉未能处理信息：{PostXml}");
+                            _ = GetTextResponse($@"亲，小玉暂时不能理解您的信息，已收妥保存信息。请切换服务方式或通过其它途径获得解答。");
 
                             if (rcr != null)
                             {
@@ -465,10 +492,10 @@ namespace MLBot.Mvc.WechatMP
                             {
                                 //关注
                                 case WxEventType.SUBSCRIBE:
-                                    return GetTextResponse($@"欢迎回家！！我是小优，可以为您提供很多服务哦！");
+                                    return GetTextResponse($@"欢迎回家！！我是小玉，可以为您提供很多服务哦！");
                                 //取消关注
                                 case WxEventType.UNSUBSCRIBE:
-                                    return GetTextResponse($@"亲，小优和收呗优选都很舍不得您！！记得常回来看看哦！");
+                                    return GetTextResponse($@"亲，小玉和收呗优选都很舍不得您！！记得常回来看看哦！");
                                 //菜单处理
                                 case WxEventType.CLICK:
                                     return GetResponseFromMenu(PostEventKey);
@@ -483,8 +510,8 @@ namespace MLBot.Mvc.WechatMP
                                 case WxEventType.LOCATION:
                                 case WxEventType.NONE:
                                 default:
-                                    LogService.AnyLog("WxRebotNoSuper", $@"小优未能处理信息：{PostXml}");
-                                    return GetTextResponse($@"亲，抱歉！小优暂时不能理解您的{PostWxEvent.ToString()}事件信息，已收妥保存信息。请通过其它途径获得解答。");
+                                    LogService.AnyLog("WxRebotNoSuper", $@"小玉未能处理信息：{PostXml}");
+                                    return GetTextResponse($@"亲，抱歉！小玉暂时不能理解您的{PostWxEvent.ToString()}事件信息，已收妥保存信息。请通过其它途径获得解答。");
                             }
                         }
 
@@ -497,14 +524,14 @@ namespace MLBot.Mvc.WechatMP
                     case WxMsgType.VOICE:
                     case WxMsgType.NONE:
                     default:
-                        LogService.AnyLog("WxRebotNoSuper", $@"小优未能处理信息：{PostXml}");
-                        return GetTextResponse($@"亲，抱歉！小优暂时不能理解您的{PostWxMsgType.ToString()}信息，已收妥保存信息。请通过其它途径获得解答。");
+                        LogService.AnyLog("WxRebotNoSuper", $@"小玉未能处理信息：{PostXml}");
+                        return GetTextResponse($@"亲，抱歉！小玉暂时不能理解您的{PostWxMsgType.ToString()}信息，已收妥保存信息。请通过其它途径获得解答。");
                 }
             }
             catch (Exception ex)
             {
                 LogService.Exception(ex);
-                return GetTextResponse($@"亲，小优的软体出问题了{ex.Message}，请通过其它途径获得解答。");
+                return GetTextResponse($@"亲，小玉的软体出问题了{ex.Message}，请通过其它途径获得解答。");
             }
         }
 
@@ -518,7 +545,7 @@ namespace MLBot.Mvc.WechatMP
         [Author("Linyee", "2019-06-24")]
         private WechatResponse GetResponseFromMenu(string postEventKey)
         {
-            LogService.AnyLog("WxRebotNoSuper", $@"小优未能正确识别菜单信息：{postEventKey} {PostXml}");
+            LogService.AnyLog("WxRebotNoSuper", $@"小玉未能正确识别菜单信息：{postEventKey} {PostXml}");
             return GetEmptyResponse();
         }
 
