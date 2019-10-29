@@ -437,6 +437,7 @@ namespace MLBot.Mvc.WechatMP
                             //意图或问题分类
                             var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent.ToLower()).Data;//暂时全转小写
                             var yt = 0;
+
                             //根据意图不同使用不同类型
                             var s2s = s2ses[yt];
                             switch (yt)
@@ -495,7 +496,7 @@ namespace MLBot.Mvc.WechatMP
                                     return GetTextResponse($@"欢迎回家！！我是小玉，可以为您提供很多服务哦！");
                                 //取消关注
                                 case WxEventType.UNSUBSCRIBE:
-                                    return GetTextResponse($@"亲，小玉和收呗优选都很舍不得您！！记得常回来看看哦！");
+                                    return GetTextResponse($@"亲，小玉都很舍不得您！！记得常回来看看哦！");
                                 //菜单处理
                                 case WxEventType.CLICK:
                                     return GetResponseFromMenu(PostEventKey);
