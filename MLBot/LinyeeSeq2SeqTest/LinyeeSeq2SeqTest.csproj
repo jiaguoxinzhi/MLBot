@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="human_cn.txt" />
+    <None Remove="human_text.txt" />
+    <None Remove="robot_cn.txt" />
+    <None Remove="robot_text.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LinyeeSeq2Seq\LinyeeSeq2Seq.csproj" />
+    <ProjectReference Include="..\MLBot.NLTK\MLBot.NLTK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="human_cn_ws.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="human_cn_ws1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="robot_cn_ws.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="robot_cn_ws1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

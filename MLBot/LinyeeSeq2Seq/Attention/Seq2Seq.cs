@@ -235,6 +235,7 @@ namespace LinyeeSeq2Seq
         }
 
         private bool training = false;
+        public string newType="new";
 
         /// <summary>
         /// 训练
@@ -668,6 +669,8 @@ namespace LinyeeSeq2Seq
 
             s2s.vocab = new List<string>();
             s2s.vocab.AddRange(w2i.Keys);
+
+            s2s.newType = "retrain";
 
             //s2s.Preprocess();
             //s2s.Save("Model.lys2s");

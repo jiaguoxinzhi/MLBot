@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LinyeeSeq2SeqTest": {
+      "commandName": "Project",
+      "commandLineArgs": "1"
+    }
+  }
+}
