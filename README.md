@@ -56,7 +56,14 @@
 * …构思框架与将要延伸的方向
 * …尝试添加一些常用RESTful api
 * …Redis功能，还没有得空整理。欢迎PR。
-* …后期版本计划增加ASR、意图识别能力、KG、TTS。
+* …后期版本计划增加ASR、NLU(意图识别能力)、KG、TTS。
+
+# 第三方Api
+> 一些功能初期都尽可能先使用第三方的接口
+> 目前未得空集成，待得空了再集成，先收集整理中。。
+* ASR：建议直接使用 [微信智能接口](https://developers.weixin.qq.com/doc/offiaccount/Intelligent_Interface/AI_Open_API.html)
+* TTS：建议直接使用 百度语音合成接口
+* NLU：尝试直接使用 [微信智能接口](https://developers.weixin.qq.com/doc/offiaccount/Intelligent_Interface/Natural_Language_Processing.html)
 
 # 参考
 1. [Seq2SeqLearn](https://github.com/mashmawy/Seq2SeqLearn)
