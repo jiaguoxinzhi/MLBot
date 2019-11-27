@@ -65,6 +65,9 @@
 * TTS：建议直接使用 百度语音合成接口
 * NLU：尝试直接使用 [微信智能接口](https://developers.weixin.qq.com/doc/offiaccount/Intelligent_Interface/Natural_Language_Processing.html)
 
+# 服务与支持
+* 目前开通网站支持 [hotml.net](https://hotml.net/)
+
 # 参考
 1. [Seq2SeqLearn](https://github.com/mashmawy/Seq2SeqLearn)
 2. chatterbot-1k 抱歉，忘了是从哪里下的。
