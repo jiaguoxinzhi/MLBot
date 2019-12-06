@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MLBot.Mvc.Servers;
 using MLBot.Mvc.WechatMP;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -105,6 +106,9 @@ namespace MLBot.Mvc
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            //»’÷æ
+            app.UseMiddleware<Logger>();
 
             //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tencent;
 
 namespace MLBot.Mvc.WechatMP
 {
@@ -50,6 +51,7 @@ namespace MLBot.Mvc.WechatMP
 
         #region IHostedService 自动保存服务
         private Timer timer = null;
+
         /// <summary>
         /// 启动服务
         /// </summary>
@@ -74,6 +76,7 @@ namespace MLBot.Mvc.WechatMP
             {
                 wcs.Dispose();
             }
+            LogService.AnyLog("MLBot", "计时服务已停止",id.ToString());
             return Task.CompletedTask;
         }
 
@@ -94,6 +97,7 @@ namespace MLBot.Mvc.WechatMP
                     wcs.CheckService();
                 }
             }, null, 5 * 1000, 5 * 1000);
+            LogService.AnyLog("MLBot","计时服务已启动", id.ToString());
             return Task.CompletedTask;
         }
 

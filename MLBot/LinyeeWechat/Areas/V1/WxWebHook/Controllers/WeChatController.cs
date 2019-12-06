@@ -76,6 +76,8 @@ namespace MLBot.Mvc.Areas.WxWebHook.Controllers
                 EncodingAESKey = WechatMpSettings.Default.EncodingAESKey,
                 Msg_Signature = msg_signature,
             };
+            WechatCustomService.Default.Encrypt_type = encrypt_type;
+
 
             try
             {
@@ -87,6 +89,7 @@ namespace MLBot.Mvc.Areas.WxWebHook.Controllers
                 if (encrypt_type == "aes" && wxcrypt == null)
                 {
                     wxcrypt = new WXBizMsgCrypt(postModel.Token, postModel.EncodingAESKey, postModel.AppId);
+                    WechatCustomService.Default.WxCrypt = wxcrypt;
                 }
 
                 if (!CheckSignature.Check(signature, postModel))

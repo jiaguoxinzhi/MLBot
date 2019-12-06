@@ -129,6 +129,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         [Author("Linyee", "2019-06-20")]
         Dictionary<string, string> xdict = new Dictionary<string, string>();
+        Dictionary<string, RebotContext> rcdict = new Dictionary<string, RebotContext>();
 
 
         WxMsgType PostWxMsgType = WxMsgType.NONE;
@@ -149,12 +150,13 @@ namespace MLBot.Mvc.WechatMP
             //对消息进行处理
             var xdoc = XDocument.Parse(PostXml);
             xdict = xdoc.Root.Elements().ToDictionary(d => d.Name.LocalName, d => d.Value);
-            //LogService.AnyLog("WeChatWebHook",$"微信公众解析后数据：{xdict.ToJsonString()}");
+            //LogService.AnyLog("WeChatWebHook", $"微信公众解析后数据：{xdict.ToJsonString()}");
             if (xdict.ContainsKey("MsgType")) Enum.TryParse<WxMsgType>(xdict["MsgType"]?.ToUpper(), out PostWxMsgType);
             if (xdict.ContainsKey("Event")) Enum.TryParse<WxEventType>(xdict["Event"]?.ToUpper(), out PostWxEvent);
             if (xdict.ContainsKey("EventKey")) PostEventKey = xdict["EventKey"];
             if (xdict.ContainsKey("Content")) PostContent = xdict["Content"];
             if (xdict.ContainsKey("Status")) PostStatus = xdict["Status"];
+            //LogService.AnyLog("WeChatWebHook", "Content", PostContent);
         }
 
 
@@ -227,6 +229,10 @@ namespace MLBot.Mvc.WechatMP
                             RebotContext rc = null;
                             string rcrkey = null;
                             RebotChatRecord rcr = null;
+                            var from = xdict["FromUserName"];
+                            if (rcdict.ContainsKey(from)) rc = rcdict[from];
+                            else rc = new RebotContext(from);
+
                             var botres= MLAiBot.Default.Processing(PostContent);
                             if (botres.IsOk)
                             {
@@ -253,10 +259,9 @@ namespace MLBot.Mvc.WechatMP
                                         res = PostContent;
                                         //return GetTextResponse(PostContent);
                                         break;
-                                        //default:
-                                        //    res = $@"亲，小玉暂时不能理解{PostContent}的意思。请使用更具体的文字来表述或通过其它途径获得解答。";
-                                        //    //return GetTextResponse($@"亲，小玉暂时不能理解{PostContent}的意思。请使用更具体的文字来表述或通过其它途径获得解答。");
-                                        //    break;
+                                    default:
+                                        res = PostContent;
+                                        break;
 
 
                                 }
@@ -322,6 +327,12 @@ namespace MLBot.Mvc.WechatMP
                             if (alaim != null && rc != null) rc.ServiceType = ServiceTypeCode.闹钟服务;
                             if (alaim != null && rc != null && rc.ServiceType == ServiceTypeCode.闹钟服务)
                             {
+                                if (!WechatCustomService.Default.AccessSendMsg)
+                                {
+                                    _ = GetTextResponse($"抱歉，当前小玉无权向您主动发送消息，所以无法为您提供闹钟服务。");
+                                    return this;
+                                }
+
                                 var time = -1;
                                 int.TryParse(alaim.Groups["time"]?.Value, out time);
                                 if (time > 0)
@@ -345,9 +356,12 @@ namespace MLBot.Mvc.WechatMP
                                     //添加 任务
                                     WechatCustomService.Default.Enqueue(() =>
                                     {
+                                        //LogService.AnyLog("MLBot", "执行提醒服务");
+
                                         if (DateTime.Now >= dt)
                                         {
-                                            WechatCustomService.Default.SendTextMsg(xdict["FromUserName"], $"您让我{time}{unit}提醒您{dothin}，现在时间已经到了！");
+                                            var sentres= WechatCustomService.Default.SendTextMsg(xdict["FromUserName"], $"您让我{time}{unit}提醒您{dothin}，现在时间已经到了！");
+                                            if(!sentres.IsOk) LogService.AnyLog("WeChatKF","提醒服务",sentres.Code.ToString(), sentres.Msg);
                                             return true;
                                         }
                                         else
