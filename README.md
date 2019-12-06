@@ -88,5 +88,5 @@
 # 参考
 1. [Seq2SeqLearn](https://github.com/mashmawy/Seq2SeqLearn)
 2. chatterbot-1k 抱歉，忘了是从哪里下的。
-3. 测试用的公众号 
+3. 测试用的微信公众号 
 > ![avatar](/mpqrcode.jpg)
