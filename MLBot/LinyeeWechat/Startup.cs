@@ -28,6 +28,7 @@ namespace MLBot.Mvc
             Configuration = configuration;
 
             WechatMpSettings.Default = configuration.GetSection("WeChatMpSettings").Get<WechatMpSettings>();
+            WxopenAISettings.Default = configuration.GetSection("WxopenAISettings").Get<WxopenAISettings>();
             if (string.IsNullOrEmpty(WechatMpSettings.Default.AppId))
             {
                 "«Îœ»≈‰÷√ WeChatMpSettings œÓ".WriteErrorLine();

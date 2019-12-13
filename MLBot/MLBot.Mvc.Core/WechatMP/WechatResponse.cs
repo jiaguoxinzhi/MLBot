@@ -1,4 +1,7 @@
-﻿using LinyeeSeq2Seq;
+﻿using JWT;
+using JWT.Algorithms;
+using JWT.Serializers;
+using LinyeeSeq2Seq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MLBot.Extentions;
@@ -124,6 +127,8 @@ namespace MLBot.Mvc.WechatMP
         [Author("Linyee", "2019-06-20")]
         private static Regex setAlaim2 = new Regex(regHeaderString + "[请]?(?<time>\\d+)(?<unit>((秒)|(分钟)|(小时)))[后]?给[我个]?闹钟(叫我(?<do>.*))?[,.!，。！]*" + regEnderString, RegexOptions.Compiled);
 
+        [Author("Linyee", "2019-12-13")]
+        private static JwtEncoder jwt = new JwtEncoder(new HMACSHA256Algorithm(), new JsonNetSerializer(), new JwtBase64UrlEncoder());
         /// <summary>
         /// 参数字典
         /// </summary>
@@ -134,6 +139,7 @@ namespace MLBot.Mvc.WechatMP
 
         WxMsgType PostWxMsgType = WxMsgType.NONE;
         WxEventType PostWxEvent = WxEventType.NONE;
+        string fromuser = null;
         string PostEventKey = null;
         string PostXml = null;
         string PostContent = null;
@@ -156,6 +162,7 @@ namespace MLBot.Mvc.WechatMP
             if (xdict.ContainsKey("EventKey")) PostEventKey = xdict["EventKey"];
             if (xdict.ContainsKey("Content")) PostContent = xdict["Content"];
             if (xdict.ContainsKey("Status")) PostStatus = xdict["Status"];
+            if (xdict.ContainsKey("FromUserName")) fromuser = xdict["FromUserName"];
             //LogService.AnyLog("WeChatWebHook", "Content", PostContent);
         }
 
@@ -448,6 +455,8 @@ namespace MLBot.Mvc.WechatMP
                                 return this;
                             }
 
+
+
                             //意图或问题分类
                             var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent.ToLower()).Data;//暂时全转小写
                             var yt = 0;
@@ -480,6 +489,28 @@ namespace MLBot.Mvc.WechatMP
                                     }
                                     break;
                             }
+
+                            //微信对话
+                            {
+                                var signedData = jwt.Encode(new { username = fromuser, msg = PostContent }, WxopenAISettings.Default.EncodingAESKey);
+                                var postjwtdata = "query=" + signedData;
+
+                                var wc = new WebClientLy();
+                                try
+                                {
+                                    LogService.AnyLog("wxopenai", "提交参数", postjwtdata);
+                                    wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                                    var resjson = wc.UploadString("https://openai.weixin.qq.com/openapi/message/" + WxopenAISettings.Default.TOKEN, postjwtdata);
+                                    var res = Newtonsoft.Json.JsonConvert.DeserializeObject<WxopenAIMessageSponseInfo>(resjson);
+                                    _ = GetTextResponse(res.answer);
+                                    return this;
+                                }
+                                catch (Exception ex)
+                                {
+                                    //res = new { ex.Message, Details = ex.ToString() }.ToJson();
+                                }
+                            }
+
 
                             //不能处理
                             LogService.AnyLog("WxRebotNoSuper", $@"小玉未能处理信息：{PostXml}");
