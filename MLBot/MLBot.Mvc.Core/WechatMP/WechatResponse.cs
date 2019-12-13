@@ -455,40 +455,38 @@ namespace MLBot.Mvc.WechatMP
                                 return this;
                             }
 
+                            ////意图或问题分类
+                            //var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent.ToLower()).Data;//暂时全转小写
+                            //var yt = 0;
 
-
-                            //意图或问题分类
-                            var words = LinyeeNLAnalyzer.Default.WordAnalyJieba(PostContent.ToLower()).Data;//暂时全转小写
-                            var yt = 0;
-
-                            //根据意图不同使用不同类型
-                            var s2s = s2ses[yt];
-                            switch (yt)
-                            {
-                                case 0:
-                                default:
-                                    var sres= s2s.Predict(words);
-                                    LogService.AnyLog("WxRebotNoSuper","seq2seq预测", $"{sres.ToJsonString()}");
-                                    if (sres.IsOk)
-                                    {
-                                        _ = GetTextResponse(string.Join("",sres.Data));
-                                        if (rcr != null)
-                                        {
-                                            rcr.Records.Add(new ChatRecordInfo()
-                                            {
-                                                Q = PostContent,
-                                                A = Content,
-                                                T = "对话",
-                                                P = 0,
-                                                //RT = -1,
-                                                DT = DateTime.Now,
-                                                IM = 0.01,
-                                            });
-                                        }
-                                        return this;
-                                    }
-                                    break;
-                            }
+                            ////根据意图不同使用不同类型
+                            //var s2s = s2ses[yt];
+                            //switch (yt)
+                            //{
+                            //    case 0:
+                            //    default:
+                            //        var sres= s2s.Predict(words);
+                            //        LogService.AnyLog("WxRebotNoSuper","seq2seq预测", $"{sres.ToJsonString()}");
+                            //        if (sres.IsOk)
+                            //        {
+                            //            _ = GetTextResponse(string.Join("",sres.Data));
+                            //            if (rcr != null)
+                            //            {
+                            //                rcr.Records.Add(new ChatRecordInfo()
+                            //                {
+                            //                    Q = PostContent,
+                            //                    A = Content,
+                            //                    T = "对话",
+                            //                    P = 0,
+                            //                    //RT = -1,
+                            //                    DT = DateTime.Now,
+                            //                    IM = 0.01,
+                            //                });
+                            //            }
+                            //            return this;
+                            //        }
+                            //        break;
+                            //}
 
                             //微信对话
                             {
