@@ -81,7 +81,7 @@ namespace MLBot.Mvc.WechatMP
         /// 时间的回答
         /// </summary>
         [Author("Linyee", "2019-06-20")]
-        private static List<string> times = new List<string>()
+        protected static List<string> times = new List<string>()
         {
             "您的手机上会显示的哦！",
             "现在是$time$",
@@ -91,7 +91,7 @@ namespace MLBot.Mvc.WechatMP
         /// 时间的回答
         /// </summary>
         [Author("Linyee", "2019-06-20")]
-        private static List<string> dates = new List<string>()
+        protected static List<string> dates = new List<string>()
         {
             "您的手机上会显示的哦！",
             "今天是$date$",
@@ -101,7 +101,7 @@ namespace MLBot.Mvc.WechatMP
         /// 时间的回答
         /// </summary>
         [Author("Linyee", "2019-06-20")]
-        private static List<string> wdays = new List<string>()
+        protected static List<string> wdays = new List<string>()
         {
             "您的手机上会显示的哦！",
             "今天是$weekday$",
@@ -112,7 +112,7 @@ namespace MLBot.Mvc.WechatMP
         /// 问得太多了
         /// </summary>
         [Author("Linyee", "2019-06-20")]
-        private static List<string> tomores = new List<string>()
+        protected static List<string> tomores = new List<string>()
         {
             "你刚刚才问过我哦！",
             "您好啰嗦哦！",
@@ -123,36 +123,37 @@ namespace MLBot.Mvc.WechatMP
 
 
         [Author("Linyee", "2019-06-20")]
-        private static Regex setAlaim1 = new Regex(regHeaderString + "[请]?(?<time>\\d+)(?<unit>((秒)|(分钟)|(小时)))[后]?提醒[我]?(?<do>.*)[,.!，。！]*" + regEnderString, RegexOptions.Compiled);
+        protected static Regex setAlaim1 = new Regex(regHeaderString + "[请]?(?<time>\\d+)(?<unit>((秒)|(分钟)|(小时)))[后]?提醒[我]?(?<do>.*)[,.!，。！]*" + regEnderString, RegexOptions.Compiled);
         [Author("Linyee", "2019-06-20")]
-        private static Regex setAlaim2 = new Regex(regHeaderString + "[请]?(?<time>\\d+)(?<unit>((秒)|(分钟)|(小时)))[后]?给[我个]?闹钟(叫我(?<do>.*))?[,.!，。！]*" + regEnderString, RegexOptions.Compiled);
+        protected static Regex setAlaim2 = new Regex(regHeaderString + "[请]?(?<time>\\d+)(?<unit>((秒)|(分钟)|(小时)))[后]?给[我个]?闹钟(叫我(?<do>.*))?[,.!，。！]*" + regEnderString, RegexOptions.Compiled);
 
         [Author("Linyee", "2019-12-13")]
-        private static JwtEncoder jwt = new JwtEncoder(new HMACSHA256Algorithm(), new JsonNetSerializer(), new JwtBase64UrlEncoder());
+        protected static JwtEncoder jwt = new JwtEncoder(new HMACSHA256Algorithm(), new JsonNetSerializer(), new JwtBase64UrlEncoder());
         /// <summary>
         /// 参数字典
         /// </summary>
         [Author("Linyee", "2019-06-20")]
-        Dictionary<string, string> xdict = new Dictionary<string, string>();
-        Dictionary<string, RebotContext> rcdict = new Dictionary<string, RebotContext>();
+        protected internal Dictionary<string, string> xdict = new Dictionary<string, string>();
+        protected internal Dictionary<string, RebotContext> rcdict = new Dictionary<string, RebotContext>();
 
 
-        WxMsgType PostWxMsgType = WxMsgType.NONE;
-        WxEventType PostWxEvent = WxEventType.NONE;
-        string fromuser = null;
-        string PostEventKey = null;
-        string PostXml = null;
-        string PostContent = null;
+        protected internal WxMsgType PostWxMsgType = WxMsgType.NONE;
+        protected internal WxEventType PostWxEvent = WxEventType.NONE;
+        protected internal string fromuser = null;
+        protected internal string PostEventKey = null;
+        protected internal string PostXml = null;
+        protected internal string PostContent = null;
         /// <summary>
         /// 状态信息 success成功
         /// </summary>
-        string PostStatus = null;
+        protected internal string PostStatus = null;
         /// <summary>
         /// 
         /// </summary>
         [Author("Linyee", "2019-06-20")]
         public WechatResponse(HttpRequest Request, string PostXml) : this()
         {
+            this.PostXml = PostXml;
             //对消息进行处理
             var xdoc = XDocument.Parse(PostXml);
             xdict = xdoc.Root.Elements().ToDictionary(d => d.Name.LocalName, d => d.Value);
@@ -182,38 +183,38 @@ namespace MLBot.Mvc.WechatMP
         /// 开始
         /// </summary>
         [Author("Linyee", "2019-04-01")]
-        private static string regHeaderString = "^";
+        protected static string regHeaderString = "^";
         /// <summary>
         /// 结束
         /// </summary>
         [Author("Linyee", "2019-04-01")]
-        private static string regEnderString = "$";
+        protected static string regEnderString = "$";
         /// <summary>
         /// 小数
         /// </summary>
         [Author("Linyee", "2019-04-01")]
-        private static string dblBodyString = "\\d+(\\.\\d+)?[DdFf]?";
+        protected static string dblBodyString = "\\d+(\\.\\d+)?[DdFf]?";
         /// <summary>
         /// 十进制 小数 不含正负符号
         /// </summary>
         [Author("Linyee", "2019-04-01")]
-        internal static Regex dblBodyRegex = new Regex(regHeaderString + dblBodyString + regEnderString, RegexOptions.Compiled);
+        internal protected static Regex dblBodyRegex = new Regex(regHeaderString + dblBodyString + regEnderString, RegexOptions.Compiled);
 
         /// <summary>
         /// 算术数值
         /// </summary>
-        internal static string ArithmeticValue = "(?<int>([\\+\\-]?\\s*\\d+[L]?))|(?<dbl>(\\d+(\\.\\d+)?([DdFfMm]?|([Ee][\\+\\-]\\d+))))";
+        internal protected static string ArithmeticValue = "(?<int>([\\+\\-]?\\s*\\d+[L]?))|(?<dbl>(\\d+(\\.\\d+)?([DdFfMm]?|([Ee][\\+\\-]\\d+))))";
 
         /// <summary>
         /// 算术表达式
         /// </summary>
         [Author("Linyee", "2019-04-01")]
-        internal static Regex ArithmeticRegex = new Regex($"{regHeaderString}((帮我)?计算)?(\\s*{ArithmeticValue}\\s*[\\+\\-\\*/^&|]\\s*)+{ArithmeticValue}(=\\??)?{regEnderString}", RegexOptions.Compiled);
+        internal protected static Regex ArithmeticRegex = new Regex($"{regHeaderString}((帮我)?计算)?(\\s*{ArithmeticValue}\\s*[\\+\\-\\*/^&|]\\s*)+{ArithmeticValue}(=\\??)?{regEnderString}", RegexOptions.Compiled);
 
         /// <summary>
         /// 对话机器人，或其它机器人
         /// </summary>
-        internal static Dictionary<int, Seq2Seq> s2ses = new Dictionary<int, Seq2Seq>() {
+        internal protected static Dictionary<int, Seq2Seq> s2ses = new Dictionary<int, Seq2Seq>() {
             { 0,Seq2Seq.Load()}
         };
 
@@ -488,6 +489,7 @@ namespace MLBot.Mvc.WechatMP
                             //        break;
                             //}
 
+
                             //微信对话
                             {
                                 var signedData = jwt.Encode(new { username = fromuser, msg = PostContent }, WxopenAISettings.Default.EncodingAESKey);
@@ -499,6 +501,7 @@ namespace MLBot.Mvc.WechatMP
                                     LogService.AnyLog("wxopenai", "提交参数", postjwtdata);
                                     wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
                                     var resjson = wc.UploadString("https://openai.weixin.qq.com/openapi/message/" + WxopenAISettings.Default.TOKEN, postjwtdata);
+                                    LogService.AnyLog("wxopenai", "响应参数", resjson);
                                     var res = Newtonsoft.Json.JsonConvert.DeserializeObject<WxopenAIMessageSponseInfo>(resjson);
                                     _ = GetTextResponse(res.answer);
                                     return this;
@@ -587,7 +590,7 @@ namespace MLBot.Mvc.WechatMP
         /// <param name="postEventKey"></param>
         /// <returns></returns>
         [Author("Linyee", "2019-06-24")]
-        private WechatResponse GetResponseFromMenu(string postEventKey)
+        internal protected virtual WechatResponse GetResponseFromMenu(string postEventKey)
         {
             LogService.AnyLog("WxRebotNoSuper", $@"小玉未能正确识别菜单信息：{postEventKey} {PostXml}");
             return GetEmptyResponse();
@@ -599,7 +602,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetEmptyResponse()
+        internal protected virtual WechatResponse GetEmptyResponse()
         {
             Content = "";//success 或空字串
             return this;
@@ -611,7 +614,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetTextResponse(string rmsg)
+        internal protected virtual WechatResponse GetTextResponse(string rmsg)
         {
             Content = $@"<xml>
   <ToUserName><![CDATA[{xdict["FromUserName"]}]]></ToUserName>
@@ -628,7 +631,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetImageResponse(string media_id)
+        internal protected virtual WechatResponse GetImageResponse(string media_id)
         {
             Content = $@"<xml>
   <ToUserName><![CDATA[{xdict["FromUserName"]}]]></ToUserName>
@@ -647,7 +650,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetVoiceResponse(string media_id)
+        internal protected virtual WechatResponse GetVoiceResponse(string media_id)
         {
             Content = $@"<xml>
   <ToUserName><![CDATA[{xdict["FromUserName"]}]]></ToUserName>
@@ -666,7 +669,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetVideoResponse(string title, string description, string media_id)
+        internal protected virtual WechatResponse GetVideoResponse(string title, string description, string media_id)
         {
             Content = $@"<xml>
   <ToUserName><![CDATA[{xdict["FromUserName"]}]]></ToUserName>
@@ -687,7 +690,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetMusicResponse(string title, string description, string MUSIC_Url, string HQ_MUSIC_Url, string media_id)
+        internal protected virtual WechatResponse GetMusicResponse(string title, string description, string MUSIC_Url, string HQ_MUSIC_Url, string media_id)
         {
             Content = $@"<xml>
   <ToUserName><![CDATA[{xdict["FromUserName"]}]]></ToUserName>
@@ -710,7 +713,7 @@ namespace MLBot.Mvc.WechatMP
         /// </summary>
         /// <returns></returns>
         [Author("Linyee", "2019-06-20")]
-        public WechatResponse GetArticlesResponse(string title, string description, string picurl, string url)
+        internal protected virtual WechatResponse GetArticlesResponse(string title, string description, string picurl, string url)
         {
             Content = $@"<xml>
   <ToUserName><![CDATA[{xdict["FromUserName"]}]]></ToUserName>
