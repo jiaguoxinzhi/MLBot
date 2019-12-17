@@ -38,6 +38,10 @@ namespace MLBot.Mvc.WechatMP
         /// 模板消息事件
         /// </summary>
         TEMPLATESENDJOBFINISH,
+        /// <summary>
+        /// 语音
+        /// </summary>
+        VOICE,
     }
 
     /// <summary>
@@ -133,7 +137,7 @@ namespace MLBot.Mvc.WechatMP
         /// 参数字典
         /// </summary>
         [Author("Linyee", "2019-06-20")]
-        protected internal Dictionary<string, string> xdict = new Dictionary<string, string>();
+        protected internal Dictionary<string, string> xdict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         protected internal Dictionary<string, RebotContext> rcdict = new Dictionary<string, RebotContext>();
 
 
