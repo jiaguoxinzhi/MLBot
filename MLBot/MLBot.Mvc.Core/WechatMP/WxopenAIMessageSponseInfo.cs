@@ -10,13 +10,18 @@ namespace MLBot.Mvc.WechatMP
     public class WxopenAIMessageSponseInfo
     {
         /// <summary>
-        /// 意图节点
+        /// 技能节点
         /// </summary>
         public int ans_node_id { get; set; }
         /// <summary>
-        /// 意图名称
+        /// 技能名称
         /// </summary>
         public string ans_node_name { get; set; }
+        /// <summary>
+        /// 意图名称
+        /// </summary>
+        public string title { get; set; }
+
         public string answer { get; set; }
         public string answer_type { get; set; }
         public object bid_stat { get; set; }

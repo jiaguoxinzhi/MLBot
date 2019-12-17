@@ -38,10 +38,6 @@ namespace MLBot.Mvc.WechatMP
         /// 模板消息事件
         /// </summary>
         TEMPLATESENDJOBFINISH,
-        /// <summary>
-        /// 语音
-        /// </summary>
-        VOICE,
     }
 
     /// <summary>
