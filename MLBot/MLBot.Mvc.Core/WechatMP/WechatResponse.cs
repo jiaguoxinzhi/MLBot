@@ -38,6 +38,58 @@ namespace MLBot.Mvc.WechatMP
         /// 模板消息事件
         /// </summary>
         TEMPLATESENDJOBFINISH,
+
+        /// <summary>
+        /// 卡券审核通过
+        /// </summary>
+        CARD_PASS_CHECK,
+        /// <summary>
+        /// 用户邻卡
+        /// </summary>
+        USER_GET_CARD,
+        /// <summary>
+        /// 从卡券进入公众号会话
+        /// </summary>
+        USER_ENTER_SESSION_FROM_CARD,
+        /// <summary>
+        /// 使用优惠券
+        /// </summary>
+        USER_GIFTING_CARD,
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        USER_DEL_CARD,
+        /// <summary>
+        /// 核销
+        /// </summary>
+        USER_CONSUME_CARD,
+        /// <summary>
+        /// 买单
+        /// </summary>
+        USER_PAY_FROM_PAY_CELL,
+        /// <summary>
+        /// 券点流水详情
+        /// </summary>
+        CARD_PAY_ORDER,
+
+        /// <summary>
+        /// 库存报警
+        /// </summary>
+        CARD_SKU_REMIND,
+        /// <summary>
+        /// 会员卡内容更新
+        /// </summary>
+        UPDATE_MEMBER_CARD,
+        /// <summary>
+        /// 进入会员卡
+        /// </summary>
+        USER_VIEW_CARD,
+        /// <summary>
+        /// 会员卡激活事件
+        /// </summary>
+        SUBMIT_MEMBERCARD_USER_INFO,
+
     }
 
     /// <summary>
@@ -55,6 +107,10 @@ namespace MLBot.Mvc.WechatMP
         LOCATION,
         LINK,
         EVENT,
+        /// <summary>
+        /// 群发完成事件
+        /// </summary>
+        MASSSENDJOBFINISH,
     }
 
     /// <summary>

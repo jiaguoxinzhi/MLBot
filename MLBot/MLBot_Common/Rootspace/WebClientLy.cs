@@ -3,6 +3,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 
 namespace MLBot
@@ -13,17 +15,40 @@ namespace MLBot
     [Author("Linyee", "2018-05-05")]
     public class WebClientLy : WebClient
     {
+        #region 客户端
+        public WebClientLy() { }
+        public WebClientLy(X509Certificate2 cer) : this()
+        {
+            this.cert = cer;
+        }
+
+        private X509Certificate2 cert { get; set; }
+
+        public WebClientLy(RemoteCertificateValidationCallback rcvc) : this()
+        {
+            this.ServerCertificateValidation = rcvc;
+        }
+        private RemoteCertificateValidationCallback ServerCertificateValidation { get; set; }
+        public WebClientLy(X509Certificate2 cer, RemoteCertificateValidationCallback rcvc) : this(cer)
+        {
+            this.ServerCertificateValidation = rcvc;
+        }
+        #endregion
+
         [Author("Linyee", "2018-05-05")]
         static WebClientLy()
         {
-            // 解决WebClient不能通过https下载内容问题
-            ServicePointManager.ServerCertificateValidationCallback +=
-                delegate (object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate,
-                         System.Security.Cryptography.X509Certificates.X509Chain chain,
-                         System.Net.Security.SslPolicyErrors sslPolicyErrors)
-                {
-                    return true; // **** Always accept
-                };
+            //并发能力
+            ServicePointManager.DefaultConnectionLimit = 512;
+
+            //// 解决WebClient不能通过https下载内容问题
+            //ServicePointManager.ServerCertificateValidationCallback +=
+            //    delegate (object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+            //             System.Security.Cryptography.X509Certificates.X509Chain chain,
+            //             System.Net.Security.SslPolicyErrors sslPolicyErrors)
+            //    {
+            //        return true; // **** Always accept
+            //    };
         }
 
         /// <summary>
