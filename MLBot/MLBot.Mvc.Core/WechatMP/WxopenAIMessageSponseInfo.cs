@@ -5,8 +5,9 @@ using System.Text;
 namespace MLBot.Mvc.WechatMP
 {
     /// <summary>
-    /// 
+    /// 微信对话信息
     /// </summary>
+    [Author("Linyee","2019-12-13")]
     public class WxopenAIMessageSponseInfo
     {
         /// <summary>
@@ -31,6 +32,10 @@ namespace MLBot.Mvc.WechatMP
         public string to_user_name { get; set; }
     }
 
+    /// <summary>
+    /// 消息详情
+    /// </summary>
+    [Author("Linyee", "2019-12-13")]
     public class MsgInfo
     {
         public string music_url { get; set; }
@@ -41,6 +46,10 @@ namespace MLBot.Mvc.WechatMP
         public List<ArticleInfo> articles { get; set; }
     }
 
+    /// <summary>
+    /// 图文信息
+    /// </summary>
+    [Author("Linyee", "2019-12-13")]
     public class ArticleInfo
     {
         public string description { get; set; }
